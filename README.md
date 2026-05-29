@@ -78,7 +78,7 @@ And receive instant insights.
 
 ## 🏗️ Architecture Overview
 
-![Architecture](./docs/architecture.png)
+![Architecture](./docs/Sentinel Copilot Agent - Architectural Diagram.png)
 
 Sentinel follows a layered architecture:
 
