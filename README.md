@@ -1,235 +1,326 @@
-# Sentinel – AI-Powered Governance Agent for Power Platform
+# 🚀 Sentinel Copilot Agent
+### AI-Powered Governance for Power Platform
 
-Sentinel is an intelligent governance assistant built using Copilot Studio, Power Automate, and Azure OpenAI. It enables organizations to automatically analyze, monitor, and interact with Power Automate flows through a conversational Copilot interface.
+Sentinel Copilot Agent is an intelligent, enterprise-grade governance system that transforms how organizations monitor, analyze, and interact with Power Platform assets.
 
-While the current implementation focuses on Power Automate flows, Sentinel is designed as a scalable governance platform for the entire Power Platform ecosystem, including Power Apps, Power Pages, and Dataverse.
+It combines **Copilot Studio**, **Power Automate**, **Azure OpenAI**, and **Azure Functions** to deliver **autonomous, AI-driven governance with conversational insights**.
 
 ---
 
-## 🚨 Problem Statement
+## 🎯 Problem Statement
 
-As organizations scale their Power Platform usage, governance becomes difficult due to:
+As Power Platform adoption scales, governance becomes a critical challenge:
 
-- Lack of centralized visibility into flows
-- Hardcoded secrets and insecure configurations
-- Missing retry, error handling, and pagination controls
-- Manual and reactive auditing processes
-- No easy way to query governance insights
+- ❌ Limited visibility into flows and their behavior  
+- ❌ Security risks (hardcoded secrets, external calls)  
+- ❌ Missing retry, error handling, and resilience patterns  
+- ❌ Manual, time-consuming audits  
+- ❌ No simple way to query governance insights  
 
-This results in **security risks, operational failures, and compliance gaps**.
+👉 Result: **Operational risk, compliance gaps, and production failures**
 
 ---
 
 ## 💡 Solution Overview
 
-Sentinel addresses these challenges by introducing an **AI-powered governance system** that:
+Sentinel introduces a **hybrid AI + rule-based governance model**:
 
-- Automatically discovers Power Automate flows through the Power Automate Management API
-- Uses Azure OpenAI to analyze risks and detect issues
-- Stores structured insights in SharePoint
-- Enables natural language interaction via Copilot
+### ✅ What it does:
 
-Users can simply ask:
-
-"Show risky flows"
-"Explain snl_fl_Test_BadFlow"
-"Create bug for this flow"
-
-And receive instant insights.
+- Automatically discovers Power Automate flows  
+- Analyzes flow definitions using **Azure OpenAI (semantic AI)**  
+- Performs structural validation via **Azure Function (AST-style analysis)**  
+- Stores insights in structured format (SharePoint)  
+- Enables natural language interaction via **Copilot Studio**  
 
 ---
 
-## 🧠 Key Features
+## 🧠 Key Innovation
+
+### 🔥 Hybrid Intelligence Model
+
+| Layer | Purpose |
+|------|--------|
+| Azure OpenAI | Semantic risk detection |
+| Azure Function (AST) | Structural validation |
+| Power Automate | Orchestration |
+| Copilot Studio | Conversational interface |
+
+👉 This combination ensures **both depth and accuracy**, unlike traditional governance tools.
+
+---
+
+## 🤖 Copilot Experience
+
+Users can interact naturally:
+
+> **"Show high risk flows"**  
+> **"Explain snl_fl_Test_BadFlow"**  
+> **"Create bug for this flow"**
+
+✅ Instant insights  
+✅ Human-readable explanations  
+✅ Actionable governance  
+
+---
+
+## 🧩 Key Features
 
 ### ✅ Autonomous Flow Discovery
-- Collector flow runs on a schedule
-- Captures metadata and Definition JSON of flows
+- Scheduled collector flow
+- Extracts metadata + definition JSON
 
 ### ✅ AI-Powered Risk Analysis
-- Azure OpenAI analyzes flow definitions
 - Detects:
-  - Hardcoded secrets
-  - Missing retry/error handling
-  - Concurrency and throttling risks
-  - Data exposure issues
+  - Hardcoded secrets  
+  - Missing retry policies  
+  - External HTTP risks  
+  - Data exposure issues  
 
-### ✅ Structured Governance Data
-- Results stored in SharePoint
-- Includes:
-  - Risk Score
-  - Risk Level
-  - Issue Summary
-  - Governance Issues (JSON)
+### ✅ AST-Based Structural Analysis
+- Azure Function (`SentinelSanitizer`)
+- Identifies:
+  - Unsafe patterns
+  - Missing resiliency configurations
+  - Structural anti-patterns
+
+### ✅ Unified Governance Data
+Stored in SharePoint:
+- Risk Score
+- Risk Level
+- Issue Summary
+- Structured JSON insights
 
 ### ✅ Conversational Copilot Interface
-- Built using Copilot Studio
-- Enables:
-  - Querying risky flows
-  - Explaining flow issues
-  - Checking bug status
-
-### ✅ Extensible Architecture
-- Designed for integration with:
-  - Azure DevOps
-  - Jira
-  - ServiceNow
+- Query flows
+- Explain issues
+- Assist governance decisions
 
 ---
 
 ## 🏗️ Architecture Overview
 
-![Architecture](./docs/Sentinel%20Copilot%20Agent%20-%20Architectural%20Diagram.png)
+![Architecture](./docs/architecture/sentinel-architecture.png)
 
-Sentinel follows a layered architecture:
+Sentinel follows a **layered enterprise architecture** designed for scalable, AI-powered governance of Power Platform solutions.
 
-- **User Interaction Layer** → Copilot Agent  
-- **Query Layer** → Power Automate Query Flow  
-- **Data Layer** → SharePoint Lists  
-- **Processing Layer** → Collector & Intelligence Flows  
-- **Service Layer** → Azure OpenAI & Power Platform APIs  
+---
+
+### 🔹 1. User Interaction Layer
+- **Sentinel Copilot Agent (Copilot Studio)**
+- Provides a conversational interface for users to interact with governance insights
+- Accepts natural language queries and initiates downstream processing
+
+---
+
+### 🔹 2. Query Layer
+- **Copilot Query Flow (`snl_fl_Copilot_QueryFlows`)**
+- Interprets user intent from Copilot
+- Retrieves governance insights from the data layer
+- Formats and returns responses back to the Copilot agent
+
+---
+
+### 🔹 3. Data Layer
+- **Sentinel Flows (SharePoint List)**  
+  Stores:
+  - Flow metadata  
+  - Flow Definition JSON  
+  - Processing status  
+
+- **Sentinel Results (SharePoint List)**  
+  Stores:
+  - Risk scores and levels  
+  - Issue summaries  
+  - Governance insights (AI + AST results)  
+
+---
+
+### 🔹 4. Processing Layer
+- **Collector Flow (`snl_fl_Collector_DiscoverFlows`)**
+  - Uses Power Automate Management API to discover flows
+  - Extracts and stores metadata in Sentinel Flows  
+
+- **Intelligence Flow (`snl_fl_Intelligence_AnalyzeFlow`)**
+  - Orchestrates analysis pipeline
+  - Sends flow definitions to:
+    - Azure OpenAI (semantic analysis)
+    - Azure Function (AST-based structural analysis)
+  - Stores enriched results in Sentinel Results  
+
+---
+
+### 🔹 5. Service Layer
+- **Power Automate Management API**
+  - Enables automated discovery of flows  
+
+- **Azure Function (SentinelSanitizer)**
+  - Performs structural (AST-style) validation of flow definitions  
+  - Detects unsafe patterns and configuration gaps  
+
+- **Azure OpenAI Service**
+  - Performs semantic analysis of flow logic  
+  - Generates human-readable explanations and risk insights  
+
+---
+
+✅ This layered architecture enables a **hybrid governance model** combining:
+- AI-driven semantic understanding  
+- Rule-based structural validation  
+- Automated data collection and orchestration  
+- Conversational user experience via Copilot  
+
 
 ---
 
 ## 🔄 System Workflow
 
-1. **Collector Flow (`snl_fl_Collector_DiscoverFlows`)**
-   - Runs on a schedule (hourly)
-   - Discovers flows and saves them in *Sentinel Flows*
+1. **Collector Flow**
+   - Discovers flows via Power Automate API
+   - Stores metadata
 
-2. **Intelligence Flow (`snl_fl_Intelligence_AnalyzeFlows`)**
-   - Reads Definition JSON from *Sentinel Flows*
-   - Uses Azure OpenAI to analyze governance risks
-   - Stores results in *Sentinel Results*
+2. **Intelligence Flow**
+   - Sends definition to:
+     - Azure OpenAI (semantic analysis)
+     - Azure Function (AST analysis)
+   - Stores results
 
-3. **Copilot Query Flow (`snl_fl_Copilot_QueryFlows`)**
-   - Handles user queries
-   - Retrieves and formats results from *Sentinel Results*
-   - Returns responses to Copilot
+3. **Copilot Query Flow**
+   - Retrieves insights
+   - Formats responses
 
 4. **Copilot Agent**
-   - Enables natural language interaction
-   - Routes user intent to flows
+   - Handles user queries
 
 ---
 
 ## 📊 Data Model
 
-Sentinel uses two SharePoint lists:
+### 🔹 Sentinel Flows
+- Flow metadata  
+- Definition JSON  
+- Processing status  
 
-### 1. Sentinel Flows
-Stores:
-- Flow metadata
-- Definition JSON
-- Analysis status
+### 🔹 Sentinel Results
+- Risk score  
+- Risk level  
+- Governance issues  
+- Insights  
 
-### 2. Sentinel Results
-Stores:
-- Risk score and level
-- Issue summary
-- Governance insights
-- Bug tracking reference
-
-👉 See full schema:
-./docs/sharepoint-setup.md
+👉 Setup guide:  
+`./docs/sharepoint-setup.md`
 
 ---
 
-## 🤖 AI Integration (Azure OpenAI)
+## 🤖 AI Integration
 
-Sentinel uses Azure OpenAI to:
+Sentinel uses **Azure OpenAI** to:
 
-- Analyze flow definitions semantically
-- Identify complex governance risks
-- Generate human-readable explanations
-- Provide structured outputs for decision-making
+- Interpret flow logic semantically  
+- Detect complex governance risks  
+- Generate human-readable explanations  
 
-Azure OpenAI configuration is managed using environment variables to ensure secure and flexible deployment across environments.
-
-👉 Details:
-./docs/ai/openai-usage.md
+👉 Config details:  
+`./docs/ai/openai-usage.md`
 
 ---
 
-## 🎯 Use Case
+## ⚙️ Azure Function (AST Analysis)
 
-### 👤 Target Users
-- Power Platform Administrators
-- Governance Teams
-- Enterprise IT Teams
+Located in: /azure-function
 
-### ✅ Example Scenario
+### Purpose:
+- Structural validation of flow definitions  
+- Deterministic rule enforcement  
 
-Instead of manually reviewing hundreds of flows, use the Sentinel Copilot Agent:
+Function: SentinelSanitizer
 
-User: Show high risk flows
-
-👉 Sentinel instantly returns the most critical flows.
-
-
-User: Explain *snl_fl_Test_BadFlow* (flow name)
-
-👉 Sentinel explains risks in simple language.
-
-
-User: Create bug for *snl_fl_Test_BadFlow* (flow name)
-
-👉 Sentinel checks if a bug exists and suggests next action.
-
----
-
-## 🚀 Demo Instructions
-
-Ask the Copilot Agent:
-
-- `Show top risky flows`
-- `Explain <flow_name>`
-- `Create bug for <flow_name>`
-
----
-
-## 🔧 Setup Instructions
-
-1. Import solution:
-
-/solution/Sentinel.zip
-
-2. Create SharePoint lists:
-- Sentinel Flows
-- Sentinel Results
-
-3. Configure environment variables
-
-4. Deploy Copilot agent
-
-5. Configure Azure OpenAI:
-   - Create an Azure OpenAI resource
-   - Deploy a model (e.g., GPT-4 / GPT-4o)
-   - Update environment variables with:
-     - Endpoint
-     - API Key
-     - Deployment Name
-  
----
-
-## 🔮 Future Enhancements
-
-- ✅ DevOps integration (bug creation automation)
-- ✅ Knowledge base + semantic search
-- ✅ Predictive risk scoring
-- ✅ Cross-platform governance (Power Apps, Dataverse)
-- ✅ Multi-agent orchestration
-
----
-
-## 🏁 Conclusion
-
-Sentinel transforms governance from a **manual, reactive process** into an **intelligent, autonomous system** powered by AI and Copilot.
+✅ Complements AI with rule-based enforcement  
+✅ Adds enterprise extensibility  
 
 ---
 
 ## 🎥 Demo Video
 
-_Add your demo video link here (≤ 5 minutes)_
+👉 Watch the 5-minute demo:  
+`./demo/demo-link.md`
+
+---
+
+## 🚀 Setup Instructions
+
+### 1. Import Solution
+
+/solution/managed/Sentinel_Managed_v1.1.0.0.zip
+
+### 2. Create SharePoint Lists
+- Sentinel Flows  
+- Sentinel Results  
+
+### 3. Configure Environment Variables
+- SharePoint site  
+- Azure OpenAI credentials  
+- Azure Function endpoint  
+
+### 4. Deploy Copilot Agent
+
+### 5. Configure Azure OpenAI
+- Endpoint  
+- API Key  
+- Deployment  
+
+---
+
+## 🎯 Target Users
+
+- Power Platform Administrators  
+- Governance Teams  
+- Enterprise IT  
+
+---
+
+## ✅ Example Use Case
+
+Instead of manually auditing flows:
+
+**User:**  
+> Show high risk flows  
+
+✅ Sentinel returns prioritized results  
+
+**User:**  
+> Explain a flow  
+
+✅ AI explains issues clearly  
+
+---
+
+## 🔮 Future Enhancements
+
+- DevOps integration (auto bug creation)  
+- Vector search & semantic knowledge base  
+- Predictive risk scoring  
+- Multi-agent orchestration  
+- Cross-platform governance  
+
+---
+
+## 🏆 Why Sentinel Stands Out
+
+✅ Copilot-first governance experience  
+✅ Hybrid AI + AST analysis  
+✅ Fully automated governance pipeline  
+✅ Extensible enterprise architecture  
+
+---
+
+## 🏁 Conclusion
+
+Sentinel transforms governance from:
+
+❌ Manual + Reactive  
+➡️  
+✅ Intelligent + Autonomous  
 
 ---
 
@@ -237,15 +328,19 @@ _Add your demo video link here (≤ 5 minutes)_
 
 Available in:
 
-/solution/Sentinel.zip
+
+/solution/managed/
+
+/solution/unmanaged/
 
 ---
 
-## 🙌 Acknowledgements
+## 🙌 Built With
 
-Built using:
+- Microsoft Copilot Studio  
+- Power Automate  
+- SharePoint  
+- Azure OpenAI  
+- Azure Functions  
 
-- Microsoft Copilot Studio
-- Power Automate
-- SharePoint
-- Azure OpenAI
+---
