@@ -225,6 +225,38 @@ Sentinel uses **Azure OpenAI** to:
 
 ---
 
+## 🔐 Security & Compliance (AST Protection Layer)
+
+Sentinel is designed with enterprise-grade security and responsible AI principles.
+
+### ✅ Sensitive Data Protection
+
+- The Azure Function (`SentinelSanitizer`) acts as a **pre-processing layer**
+- It performs AST-style analysis to:
+  - Detect sensitive patterns (keys, URLs, secrets)
+  - Sanitize or avoid sending sensitive data to AI models
+
+### ✅ Controlled AI Exposure
+
+- Only **necessary and sanitized inputs** are sent to Azure OpenAI  
+- Prevents leakage of:
+  - Credentials  
+  - Internal endpoints  
+  - Sensitive configurations  
+
+### ✅ Compliance Alignment
+
+This ensures alignment with:
+
+- Enterprise security policies  
+- Responsible AI usage  
+- Data minimization principles  
+
+👉 Sentinel implements a **“Analyze First, Send Later”** approach for safe AI integration.
+
+
+---
+
 ## ⚙️ Azure Function (AST Analysis)
 
 Located in: /azure-function
@@ -247,27 +279,115 @@ Function: SentinelSanitizer
 
 ---
 
-## 🚀 Setup Instructions
 
-### 1. Import Solution
+## 🚀 Complete Setup Instructions
 
-/solution/managed/Sentinel_Managed_v1.1.0.0.zip
+Follow these steps to deploy Sentinel end-to-end.
 
-### 2. Create SharePoint Lists
-- Sentinel Flows  
-- Sentinel Results  
+---
 
-### 3. Configure Environment Variables
-- SharePoint site  
-- Azure OpenAI credentials  
-- Azure Function endpoint  
+### 1️⃣ Import Solution
 
-### 4. Deploy Copilot Agent
+Import the managed solution: /solution/managed/Sentinel_Managed_v1.1.0.0.zip
 
-### 5. Configure Azure OpenAI
-- Endpoint  
-- API Key  
-- Deployment  
+---
+
+### 2️⃣ Configure SharePoint
+
+Create two lists:
+
+- **Sentinel Flows**
+- **Sentinel Results**
+
+👉 Full schema:
+`./docs/sharepoint-setup.md`
+
+---
+
+### 3️⃣ Configure Environment Variables
+
+Sentinel relies on environment variables for secure configuration.
+
+#### 🔐 Core Variables
+
+- `env_TenantID`
+- `env_EnvironmentID`
+- `env_EnvironmentGUID`
+
+#### 🔗 Power Automate API
+
+- `env_PowerAutomateAPI`
+- `env_PowerAutomateClientID`
+- `env_PowerAutomateClientSecret`
+- `env_MsftAuthorityLoginURL`
+- `env_PowerAutomateAudienceServiceURL`
+
+#### 🤖 Azure OpenAI
+
+- `env_OpenAI_API_URL`
+- `env_OpenAI_API_Key`
+
+#### ⚙️ Azure Function (AST Analyzer)
+
+- `env_SentinelSanitizer_FunctionUrl`
+- `env_SentinelSanitizer_FunctionKey`
+
+#### 📂 SharePoint
+
+- `env_SharePointSiteUrl`
+- `env_SentinelFlowsListName`
+- `env_SentinelResultsListName`
+
+✅ These variables enable secure and environment-independent deployment.
+
+---
+
+### 4️⃣ Deploy Azure Function
+
+1. Deploy the function from:
+
+/azure-function
+
+2. Copy:
+- Function URL
+- Function Key
+
+3. Update environment variables accordingly
+
+---
+
+### 5️⃣ Configure Power Automate Flows
+
+Ensure flows are:
+
+- Turned ON ✅
+- Connected via connection references ✅
+- Using environment variables ✅
+
+Flows included:
+
+- `snl_fl_Collector_DiscoverFlows`
+- `snl_fl_Intelligence_AnalyzeFlow`
+- `snl_fl_Copilot_QueryFlows`
+
+---
+
+### 6️⃣ Configure Copilot Agent
+
+- Publish the Copilot (Copilot Studio)
+- Ensure topics trigger flows correctly
+
+---
+
+### 7️⃣ Validate System
+
+Test via Copilot:
+
+- Show high risk flows  
+- Explain a flow  
+- Create bug for a flow  
+
+✅ You should receive AI-powered governance insights
 
 ---
 
@@ -297,11 +417,35 @@ Instead of manually auditing flows:
 
 ## 🔮 Future Enhancements
 
-- DevOps integration (auto bug creation)  
-- Vector search & semantic knowledge base  
-- Predictive risk scoring  
-- Multi-agent orchestration  
-- Cross-platform governance  
+Sentinel is designed to evolve into a **full Power Platform Governance Suite**.
+
+### 🚀 Planned Enhancements
+
+- ✅ Integration with Azure DevOps / Jira (automated bug creation)  
+- ✅ Knowledge base with semantic search (vector embeddings)  
+- ✅ Predictive risk scoring using AI  
+- ✅ Multi-agent orchestration  
+
+---
+
+### 🌐 Power Platform Ecosystem Expansion
+
+Sentinel will expand beyond Power Automate to:
+
+- **Power Apps** → App governance & anti-pattern detection  
+- **Power Pages** → Security and exposure analysis  
+- **Power BI** → Data governance and report auditing  
+- **Dataverse** → Data-level governance and anomaly detection  
+
+---
+
+### 🧠 Advanced Capabilities
+
+- Cross-platform governance insights  
+- Unified governance dashboard  
+- Real-time compliance monitoring  
+
+👉 Vision: A **centralized AI-powered governance platform for the entire Power Platform ecosystem**
 
 ---
 
