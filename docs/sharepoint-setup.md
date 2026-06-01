@@ -23,6 +23,7 @@ Stores raw metadata and definition details of Power Automate flows discovered in
 | LastAnalyzed        | Date and Time       | Timestamp of last AI analysis |
 | IsActive            | Yes/No              | Indicates if flow is active |
 | ErrorMessage         | Multiple lines text | Stores error details if analysis fails |
+| SanitizedDefinition      | Multiple lines text | Full flow definition (used for AI analysis) |
 | Modified             | Date and Time       | System column |
 | Created              | Date and Time       | System column |
 | Created By           | Person or Group     | System column |
