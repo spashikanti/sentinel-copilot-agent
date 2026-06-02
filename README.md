@@ -1,4 +1,6 @@
 # 🚀 Sentinel Copilot Agent
+> 🏆 Hackathon Submission – Microsoft Agent Academy
+
 ### AI-Powered Governance for Power Platform
 
 Sentinel Copilot Agent is an intelligent, enterprise-grade governance system that transforms how organizations monitor, analyze, and interact with Power Platform assets.
@@ -48,7 +50,10 @@ Sentinel introduces a **hybrid AI + rule-based governance model**:
 
 👉 This combination ensures **both depth and accuracy**, unlike traditional governance tools.
 
+👉 Additionally, Sentinel optimizes AI usage by reducing token consumption through AST-based preprocessing, enabling cost-efficient and scalable deployments.
+
 ---
+
 
 ## 🤖 Copilot Experience
 
@@ -225,6 +230,55 @@ Sentinel uses **Azure OpenAI** to:
 
 ---
 
+## 💰 Token Optimization & Cost Efficiency
+
+Sentinel is designed with a strong focus on **efficient AI usage and cost optimization**.
+
+### 🔹 Problem
+
+Directly sending full Power Automate flow definitions to large language models can result in:
+
+- High token consumption  
+- Increased operational cost  
+- Performance overhead  
+- Unnecessary exposure of sensitive data  
+
+---
+
+### 🔹 Solution: AST-Based Preprocessing
+
+Sentinel introduces an **Azure Function (SentinelSanitizer)** that performs:
+
+- Structural parsing (AST-style analysis)  
+- Extraction of relevant components  
+- Filtering of unnecessary or sensitive data  
+
+✅ Only **essential, sanitized inputs** are sent to Azure OpenAI  
+
+---
+
+### 🔹 Benefits
+
+- ✅ **Reduced token consumption** (smaller, focused payloads)  
+- ✅ **Lower AI costs**  
+- ✅ **Improved response accuracy** (less noise)  
+- ✅ **Faster processing time**  
+- ✅ **Enhanced security** (sensitive data filtered out)  
+
+---
+
+### 🔹 Hybrid Processing Strategy
+
+| Stage | Responsibility |
+|------|--------------|
+| Azure Function | Filter, sanitize, extract structure |
+| Azure OpenAI | Semantic understanding and explanation |
+
+👉 This ensures AI is used **efficiently and responsibly**, making Sentinel viable for **enterprise-scale deployments**.
+
+
+---
+
 ## 🔐 Security & Compliance (AST Protection Layer)
 
 Sentinel is designed with enterprise-grade security and responsible AI principles.
@@ -259,7 +313,7 @@ This ensures alignment with:
 
 ## ⚙️ Azure Function (AST Analysis)
 
-Located in: /azure-function
+Located in: `/azure-function`
 
 ### Purpose:
 - Structural validation of flow definitions  
@@ -275,7 +329,7 @@ Function: SentinelSanitizer
 ## 🎥 Demo Video
 
 👉 Watch the 5-minute demo:  
-`./demo/demo-link.md`
+[Sentinel Copilot Agent - AI Governance for Power Platform - Demo](https://www.youtube.com/watch?v=F9XDxsWQbhk)
 
 ---
 
@@ -288,7 +342,7 @@ Follow these steps to deploy Sentinel end-to-end.
 
 ### 1️⃣ Import Solution
 
-Import the managed solution: /solution/managed/Sentinel_Managed_v1.1.0.0.zip
+Import the managed solution: `/solution/managed/Sentinel_Managed_v1.1.0.0.zip`
 
 ---
 
@@ -460,11 +514,8 @@ Sentinel will expand beyond Power Automate to:
 
 ## 🏁 Conclusion
 
-Sentinel transforms governance from:
+Sentinel transforms governance from a **manual, reactive process** into an **intelligent, autonomous, and cost-efficient system powered by AI and Copilot**.
 
-❌ Manual + Reactive  
-➡️  
-✅ Intelligent + Autonomous  
 
 ---
 
