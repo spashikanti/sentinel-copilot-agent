@@ -2,7 +2,7 @@
 
 Watch the 5-minute demo here:
 
-👉 [Add YouTube Link Here]
+👉 [Sentinel Copilot Agent - AI Governance for Power Platform - Demo](https://www.youtube.com/watch?v=F9XDxsWQbhk)
 
 ## 🎬 Demo Covers
 
